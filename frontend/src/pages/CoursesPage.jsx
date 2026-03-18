@@ -196,7 +196,7 @@ const CoursesPage = () => {
 
             {/* ================= MY COURSES ================= */}
             {activeTab === "my-courses" && (
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
                 {myCourses.length === 0 && (
                   <p className="text-slate-500">
                     {t("courses.not_enrolled")}
@@ -223,8 +223,8 @@ const CoursesPage = () => {
                         className="h-40 w-full object-cover"
                       />
 
-                      <div className="p-6 space-y-4">
-                        <h3 className="text-lg font-semibold text-main">
+                      <div className="p-4 space-y-3">
+                        <h3 className="text-sm font-semibold text-main">
                           {course.title}
                         </h3>
 
