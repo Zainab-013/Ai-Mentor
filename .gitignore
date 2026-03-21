@@ -27,6 +27,7 @@ videos/
 # Backend specific
 # =====================
 backend/.env
+backend/.env
 backend/config/*.local.js
 
 # =====================
@@ -36,11 +37,6 @@ frontend/.env
 frontend/dist
 frontend/build
 frontend/.vite
-
-# =====================
-# AI Service (Python / FastAPI)
-# =====================
-ai_service/backend/.env
 
 # =====================
 # OS / Editor

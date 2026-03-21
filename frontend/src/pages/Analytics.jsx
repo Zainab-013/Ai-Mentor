@@ -1,12 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react'
+import Header from '../components/Header'
+import Sidebar from '../components/Sidebar'
+import { useAuth } from '../context/AuthContext'
+import { useSidebar } from '../context/SidebarContext'
+import { useTranslation } from 'react-i18next'
 
-import Header from "../components/Header";
-import Sidebar from "../components/Sidebar";
-
-import { useAuth } from "../context/AuthContext";
-import { useSidebar } from "../context/SidebarContext";
-
-import { useTranslation } from "react-i18next";
 const Analytics = () => {
   const { t } = useTranslation();
   const { sidebarOpen, setSidebarOpen, sidebarCollapsed, setSidebarCollapsed } = useSidebar();
@@ -55,11 +53,7 @@ const Analytics = () => {
   };
 
   const handleNextMonth = () => {
-    setCurrentDate(prevDate => {
-      const newDate = new Date(prevDate);
-      newDate.setMonth(newDate.getMonth() + 1);
-      return newDate;
-    });
+    setCurrentDate(prevDate => new Date(prevDate.setMonth(prevDate.getMonth() + 1)));
   };
 
   useEffect(() => {
@@ -103,7 +97,7 @@ const Analytics = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-canvas-alt flex flex-col">
+      <div className="min-h-screen bg-gray-50 flex flex-col">
         <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
         <Sidebar
           sidebarOpen={sidebarOpen}
@@ -114,7 +108,7 @@ const Analytics = () => {
         />
         <div className={`flex-1 flex flex-col overflow-hidden transition-all duration-300 ${sidebarCollapsed ? 'lg:ml-20' : 'lg:ml-80'
           }`}>
-          <main className="flex-1 mt-16 overflow-x-hidden overflow-y-auto bg-canvas-alt p-8">
+          <main className="flex-1 mt-16 overflow-x-hidden overflow-y-auto bg-gray-50 p-8">
             <div className="max-w-7xl mx-auto space-y-8">
               <div className="flex justify-center items-center h-64">
                 <div className="text-center">
@@ -165,9 +159,7 @@ const Analytics = () => {
   const calendarGrid = generateCalendarGrid(currentDate, studyDaysInCurrentMonth);
 
   const learningHoursChartData = analyticsData?.learningHoursChart || [];
-  const maxLearningHour = learningHoursChartData.length > 0
-  ? Math.max(...learningHoursChartData.map(d => d.hours))
-  : 1;
+  const maxLearningHour = Math.max(...learningHoursChartData.map(d => d.hours), 1); // Avoid division by zero
 
   const coursePerformanceData = user?.purchasedCourses?.map(purchasedCourse => {
     const courseInfo = allCourses.find(c => c.id == purchasedCourse.courseId);
@@ -468,4 +460,5 @@ const Analytics = () => {
     </div>
   );
 }
-export default Analytics;
+
+export default Analytics

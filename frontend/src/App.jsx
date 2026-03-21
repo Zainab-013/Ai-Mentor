@@ -14,6 +14,8 @@ import WatchedVideos from "./pages/WatchedVideos";
 import CoursePreview from "./pages/CoursePreview";
 import LearningPage from "./pages/LearningPage";
 import AdminPage from "./pages/AdminPage";
+import ForgotPassword from "./pages/ForgotPassword";
+import ResetPassword from "./pages/ResetPassword";
 import "./App.css";
 
 // Redirects from the root path based on authentication status.
@@ -38,6 +40,8 @@ const App = () => {
       <Route element={<PublicRoutes />}>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignUpPage />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/reset-password/:token" element={<ResetPassword />} />
       </Route>
 
       {/* Protected Routes */}
@@ -49,7 +53,6 @@ const App = () => {
         <Route path="/settings" element={<Settings />} />
         <Route path="/watchedvideos" element={<WatchedVideos />} />
         <Route path="/learning/:id" element={<LearningPage />} />
-        <Route path="/course-preview/:courseId" element={<CoursePreview />} />
       </Route>
 
       {/* Admin Routes */}
@@ -57,7 +60,8 @@ const App = () => {
         <Route path="/admin" element={<AdminPage />} />
       </Route>
 
-
+      {/* Other public routes */}
+      <Route path="/course-preview/:courseId" element={<CoursePreview />} />
     </Routes>
   );
 };
